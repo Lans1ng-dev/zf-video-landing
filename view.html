@@ -39,9 +39,14 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .logo-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
     img.logo {
       max-height: 60px;
-      margin-bottom: 1.5rem;
     }
 
     h1 {
@@ -84,8 +89,9 @@
 </head>
 <body>
   <div class="card">
-    <img src="https://zagoriy.foundation/wp-content/themes/zagoriy_foundation/images/logo-white-new.png
-" alt="Zagoriy Foundation" class="logo" />
+    <div class="logo-wrapper">
+      <img src="https://zagoriy.foundation/wp-content/themes/zagoriy_foundation/images/logo-white-new.png" alt="Zagoriy Foundation" class="logo" />
+    </div>
     <h1 id="greeting">Привіт!</h1>
     <p class="position" id="position-line"></p>
     <iframe id="player" allowfullscreen></iframe>
@@ -101,9 +107,7 @@
     document.getElementById("greeting").textContent = name ? `Привіт, ${name}!` : "Привіт!";
     document.getElementById("position-line").textContent = position ? `Позиція: ${position}` : "";
 
-    // Обробка посилання
     let embedUrl = rawVideo;
-
     if (rawVideo.includes("app.heygen.com/videos/")) {
       const videoId = rawVideo.split("/").pop();
       embedUrl = `https://app.heygen.com/embeds/${videoId}`;
