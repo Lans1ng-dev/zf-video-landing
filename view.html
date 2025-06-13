@@ -95,15 +95,20 @@
     const params = new URLSearchParams(window.location.search);
     const name = decodeURIComponent(params.get("name") || "");
     const position = decodeURIComponent(params.get("position") || "");
-    const video = decodeURIComponent(params.get("video") || "");
+    const rawVideo = decodeURIComponent(params.get("video") || "");
 
-    document.getElementById("greeting").textContent = name
-      ? `Привіт, ${name}!`
-      : "Привіт!";
-    document.getElementById("position-line").textContent = position
-      ? `Позиція: ${position}`
-      : "";
-    document.getElementById("player").src = video;
+    document.getElementById("greeting").textContent = name ? `Привіт, ${name}!` : "Привіт!";
+    document.getElementById("position-line").textContent = position ? `Позиція: ${position}` : "";
+
+    // Обробка посилання
+    let embedUrl = rawVideo;
+
+    if (rawVideo.includes("app.heygen.com/videos/")) {
+      const videoId = rawVideo.split("/").pop();
+      embedUrl = `https://app.heygen.com/embeds/${videoId}`;
+    }
+
+    document.getElementById("player").src = embedUrl;
   </script>
 </body>
 </html>
